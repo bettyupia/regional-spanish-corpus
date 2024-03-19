@@ -1,10 +1,10 @@
 import whisper
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 import csv
 
 # Load .env
-# load_dotenv()
+load_dotenv()
 
 # Detect audio files
 audio_folder = os.getenv("AUDIO_FILES_PATH")
