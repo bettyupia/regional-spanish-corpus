@@ -2,3 +2,5 @@
 .env
 # python venv
 env/
+# cache
+.cache/
