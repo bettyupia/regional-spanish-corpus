@@ -1,12 +1,13 @@
 # Regional Spanish Corpus in Peru
 
+## Transcriber
 ### Setups
+* Navigate to `transcriber` folder
 * Python version used `3.11.8`
-* Setup a python venv and install dependencies in `requirements.txt`
+* Set up a python venv and install dependencies in `requirements.txt`
 * `cp .env.dev .env`
-* Save your [OpenAI API Key](https://platform.openai.com/api-keys) in `.env`
+* Set up OpenAPI Whisper according to [here](https://github.com/openai/whisper)
 
 ### How to use transcriber
-`python main.py <wav file>`
-
-
+1. Toggle settings in `.env`
+2. Run `python main.py`
