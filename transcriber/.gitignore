@@ -1,6 +1,11 @@
 # env vars
 .env
+
 # python venv
 env/
+
 # cache
 .cache/
+
+# pycache
+__pycache__/
