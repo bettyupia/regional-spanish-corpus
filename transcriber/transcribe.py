@@ -1,7 +1,7 @@
 import whisper
 from dotenv import load_dotenv
 import os
-import csv
+from helper import *
 
 # Load .env
 load_dotenv()
@@ -15,9 +15,7 @@ WHISPER_MODEL = os.getenv("WHISPER_MODEL")
 # Read existing transcriptions
 transcriptions = []
 if os.path.exists(OUTPUT_FILE_PATH):
-    with open(OUTPUT_FILE_PATH, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        transcriptions = [row for row in csv_reader]
+    transcriptions = read_csv(OUTPUT_FILE_PATH)
 
 existing_transcriptions_ids = [transcription["id"] for transcription in transcriptions]
 
@@ -48,10 +46,7 @@ def transcribe():
 
     # Save transcriptions as csv
     print("Saving")
-    with open(OUTPUT_FILE_PATH, 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=["id", "text"])
-        writer.writeheader()
-        writer.writerows(transcriptions)
+    write_csv(OUTPUT_FILE_PATH, transcriptions)
     print("Done")
 
 if (len(audio_files) > 0):
