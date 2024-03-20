@@ -11,8 +11,14 @@ OUTPUT_FILE_PATH = os.getenv("OUTPUT_FILE_PATH")
 PARSE_OUTPUT_PATH = os.getenv("PARSE_OUTPUT_PATH")
 
 transcriptions = read_csv(OUTPUT_FILE_PATH)
+def map_doc(doc):
+    doc['title'] = doc['id']
+    doc['id'] = uuid.uuid4()
+    doc['raw'] = doc['text']
+    doc.pop('text', None)
+    return doc
 
-docs = [{'id': uuid.uuid4(), 'title': t['id'], 'raw': t['text']} for t in transcriptions]
+docs = list(map(map_doc, transcriptions))
 tokens = []
 sentences = []
 
