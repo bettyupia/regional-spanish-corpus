@@ -10,4 +10,6 @@
 
 ### How to use transcriber
 1. Toggle settings in `.env`
-2. Run `python main.py`
+2. Activate venv
+3. Run `python transcribe.py` to transcribe audio first
+4. Run `python parse.py to parse transcribed result
