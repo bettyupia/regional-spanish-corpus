@@ -28,6 +28,17 @@ def map_token(sentence_id, token):
     token['sentence_id'] = sentence_id
     return token
 
+def parse_tree_to_dict(tree):
+    if len(tree.children) < 1:
+        return {
+            'label': tree.label,
+        }
+    return {
+        'label': tree.label,
+        'children': [parse_tree_to_dict(child) for child in tree.children]
+    }
+
+
 nlp = stanza.Pipeline(lang='es', processors='tokenize,mwt,pos,lemma,depparse,constituency', model_dir='.cache/stanza')
 for raw_doc in docs:
     doc = nlp(raw_doc['raw'])
@@ -38,7 +49,7 @@ for raw_doc in docs:
             'index': i,
             'doc_id': raw_doc['id'],
             'raw': sentence.text,
-            'constituency' : str(sentence.constituency)
+            'constituency' : str(parse_tree_to_dict(sentence.constituency))
         })
         map_token_partial = partial(map_token, sentence_id)
         tokens += map(map_token_partial, sentence.to_dict())
