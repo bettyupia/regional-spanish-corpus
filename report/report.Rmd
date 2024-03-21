@@ -56,9 +56,9 @@ h\. Compraba (él) el periódico todos los días ()
 
 i\. Todos los dı´as compraba (él) el perio´dico.
 
-According to @ocampo1995, In standard Spanish the object-verb word order is pragmatically marked, and it used to indicate a contrary to expectation function, contrast, focal constituent and topic. This word order occurs no so frequent in non-contact Spanish such as "limeño" Spanish. Another study by @KleeandOcampo that investigated the pragmatic functions of OV and VO constructions in Calca Spanish discovered that the speakers make use of the object-verb word order to express repetition, summary, agreement and explanation in addition to the previously mentioned pragmatic functions.
+According to @ocampo1995, In standard Spanish the object-verb word order is pragmatically marked, and it is used to indicate a contrary to expectation function, contrast, focal constituent and topic. This word order occurs no so frequent in non-contact Spanish such as "limeño" Spanish. Another study by @KleeandOcampo that investigated the pragmatic functions of OV and VO constructions in Calca Spanish discovered that the speakers make use of the object-verb word order to express repetition, summary, agreement and explanation in addition to the previously mentioned pragmatic functions.
 
-SVO is the canonical word order in Spanish. However When the subject is narrowly focused, it typically appears at the end of the sentence. We can say that focus marking affects the structure of sentences, which often results in the alteration of the canonical SVO order(see Domínguez Reference Domínguez2013 for an overview)
+SVO is the canonical word order in Spanish. However When the subject is narrowly focused, it typically appears at the end of the sentence creating a VOS order. We can then say that focus marking affects the sentence structure, which often results in the alteration of the canonical SVO order(Domínguez2013)
 
 One crucial property of Spanish is that the ordering of elements in a sentence reveals a particular information structure which is unique to that utterance. We can say that focus marking affects the structure of sentences, which often results in the alteration of the canonical SVO order
 
@@ -84,66 +84,93 @@ tokens <- read.csv("../transcriber/output/parsed/tokens.csv")
 
 ```
 
-```{r get SVO}
+```{r get word order function}
 
-svos <- tibble(
-  doc_id=character(),
-  doc_title=character(),
-  sentence_id=character(),
-  sentence_index=character(),
-  verb_id=character(),
-  verb_index=character(),
-  word_order=character(), 
-  dialect=character())
-
-for (i in 1:nrow(sentences)) {
-  sentence <- sentences[i, ]
-  document <- (documents %>% filter(id == sentence$doc_id))[1, ]
-
-  sentence_tokens <- tokens %>% filter(sentence_id == sentence$id)
-
-  sentence_verb_tokens <- sentence_tokens %>% filter(upos == 'VERB')
-  if (nrow(sentence_verb_tokens) > 0) {
-    for (i in 1:nrow(sentence_verb_tokens)) {
-      verb <- sentence_verb_tokens[i, ]
-      nsubj <- sentence_tokens %>% filter(head == verb$index & deprel == 'nsubj')
-      obj <- sentence_tokens %>% filter(head == verb$index & deprel == 'obj')
-
-      if (nrow(nsubj) == 1 & nrow(obj) == 1) {
-
-      # create named vector with s/v/o as names and their indices as value
-        word_order_pos <- c('s' = nsubj[1, ]$index, 'v' = verb$index, 'o' = obj[1, ]$index)
-      # sort by indices then get names
-        sorted_word_order <- names(sort(word_order_pos))
-      # concatenate
-        word_order <- paste(sorted_word_order, collapse = '')
-
-        svos <- svos %>%  add_row(
-          doc_id=document$id,
-          doc_title=document$title,
-          sentence_id=sentence$id,
-          sentence_index=as.character(sentence$index),
-          verb_id=verb$id,
-          verb_index=verb$index,
-          word_order=word_order,
-          dialect=document$dialect)
+get_sentences_word_order <- function(sentences_in) {
+  
+  word_orders <- tibble(
+    doc_id=character(),
+    doc_title=character(),
+    sentence_id=character(),
+    sentence_index=character(),
+    verb_id=character(),
+    verb_index=character(),
+    word_order=character(), 
+    dialect=character())
+  
+    for (i in 1:nrow(sentences_in)) {
+      sentence <- sentences_in[i, ]
+      
+      document <- (documents %>% filter(id == sentence$doc_id))[1, ]
+    
+      sentence_tokens <- tokens %>% filter(sentence_id == sentence$id)
+    
+      sentence_verb_tokens <- sentence_tokens %>% filter(upos == 'VERB')
+      
+      if (nrow(sentence_verb_tokens) > 0) {
+        for (i in 1:nrow(sentence_verb_tokens)) {
+          verb <- sentence_verb_tokens[i, ]
+          nsubj <- sentence_tokens %>% filter(head == verb$index & deprel == 'nsubj')
+          obj <- sentence_tokens %>% filter(head == verb$index & deprel == 'obj')
+    
+          if (nrow(nsubj) == 1 & nrow(obj) == 1) {
+    
+          # create named vector with s/v/o as names and their indices as value
+            word_order_pos <- c('s' = nsubj[1, ]$index, 'v' = verb$index, 'o' = obj[1, ]$index)
+          # sort by indices then get names
+            sorted_word_order <- names(sort(word_order_pos))
+          # concatenate
+            word_order <- paste(sorted_word_order, collapse = '')
+    
+            word_orders <- word_orders %>%  add_row(
+              doc_id=document$id,
+              doc_title=document$title,
+              sentence_id=sentence$id,
+              sentence_index=as.character(sentence$index),
+              verb_id=verb$id,
+              verb_index=verb$index,
+              word_order=word_order,
+              dialect=document$dialect)
+          }
+        }
       }
     }
-  }
+  
+    return(word_orders)
+
 }
 ```
 
 ## IV. Data analysis
 ```{r}
-# svos_stats <- svos %>%
-#   group_by(dialect, word_order) %>%
-#   summarise(count = n())
+left_join(sentences, documents %>% rename(doc_id = id), by = "doc_id") %>%
+  group_by(dialect) %>% 
+  summarise(count = n())
 
-# Creating the barplot
-svos_stats %>%
+```
+
+```{r word order for all sentences by dialect}
+get_sentences_word_order(sentences) %>%
+  group_by(dialect, word_order) %>%
+  summarise(count = n()) %>%
   ggplot(aes(x = word_order, y = count, fill = dialect)) + 
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
-  labs(x = "Word Order", y = "Count")
+  labs(x = "Word Order", y = "Count",
+       title = "Word Orders for All Sentences by Dialects")
+```
+
+```{r word order for affirmative sentences by dialect}
+affirmative_sentence_ids <- (tokens %>% group_by(sentence_id) %>% filter(!any(text == '?')) %>% summarise())$sentence_id
+affirmative_sentences <- sentences %>% filter(id %in% affirmative_sentence_ids)
+
+get_sentences_word_order(affirmative_sentences) %>%
+  group_by(dialect, word_order) %>%
+  summarise(count = n()) %>%
+  ggplot(aes(x = word_order, y = count, fill = dialect)) + 
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  labs(x = "Word Order", y = "Count",
+       title = "Word Orders for Affirmative Sentences by Dialects")
+
 ```
 
 ## V. Discussion
