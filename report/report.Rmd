@@ -134,6 +134,17 @@ for (i in 1:nrow(sentences)) {
 ```
 
 ## IV. Data analysis
+```{r}
+# svos_stats <- svos %>%
+#   group_by(dialect, word_order) %>%
+#   summarise(count = n())
+
+# Creating the barplot
+svos_stats %>%
+  ggplot(aes(x = word_order, y = count, fill = dialect)) + 
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  labs(x = "Word Order", y = "Count")
+```
 
 ## V. Discussion
 
