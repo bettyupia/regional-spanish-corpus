@@ -43,15 +43,15 @@ nlp = stanza.Pipeline(lang='es', processors='tokenize,mwt,pos,lemma,depparse,con
 for raw_doc in docs:
     doc = nlp(raw_doc['raw'])
     for i, sentence in enumerate(doc.sentences):
-        sentence_id = uuid.uuid4(),
+        sentence_id = uuid.uuid4()
         sentences.append({
-            'id': uuid.uuid4(),
+            'id': sentence_id,
             'index': i,
             'doc_id': raw_doc['id'],
             'raw': sentence.text,
             'constituency' : str(parse_tree_to_dict(sentence.constituency))
         })
-        map_token_partial = partial(map_token, sentence_id)
+        map_token_partial = partial(map_token, str(sentence_id))
         tokens += map(map_token_partial, sentence.to_dict())
 
 print("Saving...")
