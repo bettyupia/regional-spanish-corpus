@@ -12,9 +12,9 @@ bibliography: bibliography_citedrive.bib
 
 ## I. Introduction
 
-Every language unique and serves as a window into the human cognition, culture, and society, and it contains features that other languages may not. Yet, all languages serve the universal purpose of communication. The study of a language not only unravels the structure and patterns embedded within linguistic expressions but also sheds light on the diverse ways in which language is used and understood across different contexts and communities.
+Every language unique and serves as a window into the human cognition, culture, and society. A single language could contain features that other language may not. Yet, all languages serve the universal purpose of communication. The study of a language not only unravels the structure and patterns embedded within linguistic expressions but also sheds light on the diverse ways in which language is used and understood across different contexts and communities. Thus, if one wants to study a language, large data of the language is needed. 
 
-Spanish is a language spoken by millions all over the world. It exhibits considerable diversity across different regions, influenced by historical, social, geographical, and linguistic contact. Each Spanish-speaking country, and even within countries, regions, or communities, may have distinct linguistic features, known as dialects. The linguistic variation of these dialects manifests in differences in vocabulary, pronunciation, grammar, discourse patterns, etc. Among the Spanish-speaking countries, Peru stands out as a compelling case study for investigating linguistic diversity and variation. Situated in the heart of South America, Peru boasts a rich tapestry of cultural and linguistic heritage, shaped by indigenous languages, colonial history, and modern-day sociopolitical dynamics. Within Peru itself, linguistic diversity is further amplified by the presence of multiple indigenous languages alongside Spanish, as well as regional variations in Spanish dialects. The Andean Spanish of Peru is a great example of linguistic diversity and how a language can be shaped when two to more languages interact. The Andean Spanish has been greatly influenced by the indigenous languages of the region not only phonologically speaking but also grammatically. It is known that this dialect makes use of OV structures more frequently than the coastal dialect, which is a typical feature of Quechua and Aymara languages that are spoken in this region[@Klee2011].
+Spanish is a language spoken by millions all over the world. It exhibits considerable diversity across different regions, influenced by historical, social, geographical, and linguistic contact. Each Spanish-speaking country, and even within countries, regions, or communities, may have distinct linguistic features, known as dialects. The linguistic variation of these dialects manifests in differences in vocabulary, pronunciation, grammar, discourse patterns, etc. Among the Spanish-speaking countries, Peru stands out as a compelling case study for investigating linguistic diversity and variation. Situated in the heart of South America, Peru boasts a rich tapestry of cultural and linguistic heritage, shaped by indigenous languages, colonial history, and other sociopolitical factors. Within Peru itself, linguistic diversity is further amplified by the presence of multiple indigenous languages alongside Spanish, as well as regional variations in Spanish dialects. The Andean Spanish of Peru is a great example of linguistic diversity and how a language can be shaped when two to more languages interact. The Andean Spanish has been greatly influenced by the indigenous languages of the region not only phonologically speaking but also grammatically. It is known that this dialect makes use of OV structures more frequently than the coastal dialect, which is a typical feature of Quechua and Aymara languages that are spoken in this region[@Klee2011].
 
 In linguistics, the creation and analysis of corpora offer invaluable insights into the intricate nuances of language structure, variation, and usage. Therefore, I decided to create a corpus of the region of the coast and analyse the frequency of OV sentences from the coast and see to what extend the OV sentences typical of andean Spanish are present in the coastal peruvian Spanish. My idea in the beginning was to collect data from Tiktok from 3 different regions of Peru, namely, data from the coastal, andean and jungle dialect to then compare their different word order. Nonetheless, there was not enough videos available online for this kind of research. Then I found a large dataset online and decided to work with this data annotate it and analyse it. The main aim of this paper is to build a corpus using a dataset [@guevara-rukoz-etal-2020-crowdsourcing] containing only sentences in the Peruvian standard dialect of Spanish. This data has been taken from different audios. It has been transcribed and corrected. The sentences will be annotated so that it will be easier to investigate different linguistic phenomena. Nevertheless, we will focus on the word order of Spanish. In addition, this paper aims to investigate the frequency of OV sentences on our dataset.
 
@@ -32,27 +32,27 @@ Spanish is a language that allows different positions of its constituencies. Alt
 
 Examples from @olarrea2012
 
-a\. (Él) compraba el periódico todos los días
+a\. (Él) compraba el periódico todos los días (SV0)
 
-(He) used-to-buy the newspaper every day
+(He) used-to-buy the newspaper every day 
 
-b\. (Él) compraba todos los días el periódico
+b\. (Él) compraba todos los días el periódico(SVO)
 
-c\. El perio´dico, (el) lo compraba todos los dı´as
+c\. El perio´dico, (el) lo compraba todos los dias (OSV)
 
 The newspaper, (he) cl-it used-to-buy everyday
 
-d\. Él, el periódico lo compraba todos los dı´as
+d\. Él, el periódico lo compraba todos los días (SOV)
 
-e\. El perio´dico lo compraba (él) todos los días
+e\. El periódico lo compraba (él) todos los días (OVS)(OV)
 
-f\. El periódico es lo que (él) compraba todos los dı´as
+f\. El periódico es lo que (él) compraba todos los días (OSV)(OV)
 
 The newspaper is what (he) used-to-buy everyday
 
-g\. El periódico es lo que compraba todos los dı´as (él)
+g\. El periódico es lo que compraba todos los días (él) (OVS) (OV)
 
-h\. Compraba (él) el perio´dico todos los dı´as
+h\. Compraba (él) el periódico todos los días ()
 
 i\. Todos los dı´as compraba (él) el perio´dico.
 
@@ -67,126 +67,70 @@ The F-marked subject (Marta) is the only element bearing main stress in sentence
 ## III. Methodology
 
 ```{r libraries}
-#install.packages("udpipe")
-library(udpipe)
 library(tidyverse)
-library(readxl)
 library(dplyr)
-
 ```
+
+Questions: 
+How to know the word order of the sentences from dependancy tree?
+
+
 
 ```{r datasets}
 
-dataset.C.A.Spanish <- read.csv("output.csv")
-female.dataset <- read_delim("line_index_female.tsv", col_names = FALSE, delim = "\t")
-male.dataset <- read_delim("line_index_male.tsv", col_names = FALSE, delim = "\t")
-colnames(female.dataset) <- c('ID','sentences')
-colnames(male.dataset) <- c('ID','sentences')
-complete_dataset<- rbind(female.dataset, male.dataset) 
-```
-
-```{r data wrangling}
-as.data.frame(dataset.C.A.Spanish)
-dataset.C.A.Spanish <- dataset.C.A.Spanish %>% 
-  mutate(variety = id) 
+documents <- read.csv("../transcriber/output/parsed/documents.csv")
+sentences <- read.csv("../transcriber/output/parsed/sentences.csv")
+tokens <- read.csv("../transcriber/output/parsed/tokens.csv")
 
 ```
 
+```{r get SVO}
 
-```{r model}
-#ud_model <- udpipe_download_model(language = "spanish")
-model <- udpipe_load_model(file = "spanish-gsd-ud-2.5-191206.udpipe")
+svos <- tibble(
+  doc_id=character(),
+  doc_title=character(),
+  sentence_id=character(),
+  sentence_index=character(),
+  verb_id=character(),
+  verb_index=character(),
+  word_order=character(), 
+  dialect=character())
 
-annotations <- udpipe_annotate(model, x = complete_dataset$sentences)
+for (i in 1:nrow(sentences)) {
+  sentence <- sentences[i, ]
+  document <- (documents %>% filter(id == sentence$doc_id))[1, ]
 
+  sentence_tokens <- tokens %>% filter(sentence_id == sentence$id)
 
-# str(annotations_df)
-# table(annotations_df$upos)
-# view(table_of_POS)
-# table(annotations_df$dep_rel)
-# tokens <- annotations_df$token
-# as.data.frame(tokens)
-# 
-# text1 <- udpipe_annotate(model, x = complete_dataset$sentences[1])
-# text1 <- as.data.frame(text1)
-```
+  sentence_verb_tokens <- sentence_tokens %>% filter(upos == 'VERB')
+  if (nrow(sentence_verb_tokens) > 0) {
+    for (i in 1:nrow(sentence_verb_tokens)) {
+      verb <- sentence_verb_tokens[i, ]
+      nsubj <- sentence_tokens %>% filter(head == verb$index & deprel == 'nsubj')
+      obj <- sentence_tokens %>% filter(head == verb$index & deprel == 'obj')
 
-```{r df}
-.5
-annotations_df <- as.data.frame(annotations)
-```
+      if (nrow(nsubj) == 1 & nrow(obj) == 1) {
 
-```{r 2}
-annotations_df <- annotations_df %>% mutate(id = paste(doc_id, token_id, sep = "_"), head_id = paste(doc_id, head_token_id, sep="_"))
-annotations_df <- merge(annotations_df, annotations_df[, c("id", "upos")], by.x = "head_id", by.y = "id", all.x = TRUE)
-names(annotations_df)[names(annotations_df) == "upos.y"] <- "head_upos"
+      # create named vector with s/v/o as names and their indices as value
+        word_order_pos <- c('s' = nsubj[1, ]$index, 'v' = verb$index, 'o' = obj[1, ]$index)
+      # sort by indices then get names
+        sorted_word_order <- names(sort(word_order_pos))
+      # concatenate
+        word_order <- paste(sorted_word_order, collapse = '')
 
-```
-
-```{r 4}
-# verb_df <- annotations_df %>% filter(upos == 'VERB' & head_token_id == 0) %>% select(doc_id, token_id)
-# sbv <- data.frame(doc_id = integer(), token_id= integer())
-# sav <- data.frame(doc_id = integer(), token_id= integer())
-# # Loop through each row
-# for (i in 1:nrow(verb_df)) {
-#   verb <- verb_df[i, ]
-#   nsubj_df <- annotations_df %>% filter(doc_id== verb$doc_id & head_token_id==verb$token_id & dep_rel=='nsubj')
-#   sbv <- rbind(sbv, nsubj_df %>% filter(token_id < verb$token_id) %>% select(doc_id, token_id))
-#   sav <- rbind(sav, nsubj_df %>% filter(token_id > verb$token_id) %>% select(doc_id, token_id))
-# }
-
-# filter affirmative sentence
-# filter sentence with nsubj and obj depends on a verb
-```
-
-```{r f}
-filtered_doc_groups <- annotations_df %>% group_by(doc_id) %>% filter(!any(token == '?') & any(dep_rel == 'nsubj' & head_upos=='VERB') & any(dep_rel == 'obj' & head_upos=='VERB'))
-```
-
-```{r d}
-# Define a function to call within each group
-get_word_order <- function(group_df) {
-  print(cat(c("processing group", group_df[1,]$doc_id)))
-  verbs <- group_df %>% filter(upos.x=='VERB')
-  result_df <- data.frame(doc_id=character(),verb_id=character(), sentence=character(), word_order=character())
-  for (i in 1:nrow(verb_df)) {
-    verb <- verbs[i, ]
-    nsubj <- group_df %>% filter(head_id==verb$id & dep_rel=='nsubj')
-    obj <- group_df %>% filter(head_id==verb$id & dep_rel=='nsubj')
-    if (nrow(nsubj) == 1 & nrow(obj) == 1) {
-      
-      word_order_pos <- c("S"=nsubj[1, ]$token_id, "V"=verb$token_id, "O"=obj[1, ]$token_id)
-      sorted_word_order <- names(sort(word_order_pos))
-
-      # Concatenate the sorted names
-      word_order <- paste(sorted_word_order, collapse = "")
-      result_df %>%  add_row(doc_id=verb$doc_id, verb_id=verb$token_id, sentence=verb$sentence, word_order=word_order)
-    }
-  }
-  return(result_df)
-}
-```
-
-```{r r}
-result_df <- tibble(doc_id=character(),verb_id=character(), sentence=character(), word_order=character())
-for (i in unique(filtered_doc_groups$doc_id)) {
-  doc_df <- filtered_doc_groups %>% filter(doc_id==i)
-  verbs <- doc_df %>% filter(upos.x=='VERB')
-  for (i in 1:nrow(verbs)) {
-    verb <- verbs[i, ]
-    nsubj <- doc_df %>% filter(head_id==verb$id & dep_rel=='nsubj')
-    obj <- doc_df %>% filter(head_id==verb$id & dep_rel=='obj')
-    if (nrow(nsubj) == 1 & nrow(obj) == 1) {
-      word_order_pos <- c("S"=nsubj[1, ]$token_id, "V"=verb$token_id, "O"=obj[1, ]$token_id)
-      sorted_word_order <- names(sort(word_order_pos))
-      # Concatenate the sorted names
-      word_order <- paste(sorted_word_order, collapse = "")
-      result_df <- result_df %>%  add_row(doc_id=verb$doc_id, verb_id=verb$token_id, sentence=verb$sentence, word_order=word_order)
+        svos <- svos %>%  add_row(
+          doc_id=document$id,
+          doc_title=document$title,
+          sentence_id=sentence$id,
+          sentence_index=as.character(sentence$index),
+          verb_id=verb$id,
+          verb_index=verb$index,
+          word_order=word_order,
+          dialect=document$dialect)
+      }
     }
   }
 }
-
-
 ```
 
 ## IV. Data analysis
