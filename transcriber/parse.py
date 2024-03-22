@@ -1,4 +1,5 @@
 import stanza
+from stanza.pipeline.core import DownloadMethod
 import uuid
 import os
 from dotenv import load_dotenv
@@ -39,7 +40,11 @@ def parse_tree_to_dict(tree):
     }
 
 
-nlp = stanza.Pipeline(lang='es', processors='tokenize,mwt,pos,lemma,depparse,constituency', model_dir='.cache/stanza')
+nlp = stanza.Pipeline(lang='es', 
+                      processors='tokenize,mwt,pos,lemma,depparse,constituency', 
+                      model_dir='.cache/stanza',
+                      download_method=DownloadMethod.REUSE_RESOURCES
+                      )
 for raw_doc in docs:
     doc = nlp(raw_doc['raw'])
     for i, sentence in enumerate(doc.sentences):
