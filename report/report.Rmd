@@ -65,6 +65,12 @@ One crucial property of Spanish is that the ordering of elements in a sentence r
 The F-marked subject (Marta) is the only element bearing main stress in sentence-final position in, a position that is unusual for subjects in languages with canonical SVO order (Zubizarreta. This example shows that there is a narrow link between where stress in assigned and where narrowly-focused elements can appear in a sentence in Spanish.
 
 ## III. Methodology
+### Transcription
+
+The second step of this corpus creation was to find a way to transform the spoken data into text. So, for the transcription, I used a transformer model called Whisper.  I created a repository in github to record and organize my work. The annotated code  is in a script called transcriber. 
+
+When I first started using the base model. the result of the transcription was not that accurate because I was using the base model. The medium model, in contrast, was and although it has some mistakes, it did a grant job. Another thing to mention is that when I try to use the large one, my computer could not handle. 
+
 
 ```{r libraries}
 library(tidyverse)
