@@ -72,22 +72,31 @@ SVO is the canonical word order in Spanish. However When the subject is narrowly
 
 One of the first steps of this corpus creation was to find videos. I wanted to collect spoken naturalistic data from tiktok videos. It seemed to be an easy task. Just find any random videos and download them base on their regional accent. In fact, I spend quite long time trying to find these videos. Though, this was not the case of coastal Spanish videos. I found videos of people recommending restaurants, clothes, makeup and even activities that one can do during your free time. The hard part, however, was to find videos from andean and jungle people speaking Spanish. When searching for videos of recommendations of places in their regions, of restaurants or activities, only people speaking a coastal dialect appeared. I also found videos of these speakers explaining the way they speak. This was the case of both dialects. This, in my opinion, is not natural discourse and cannot be used to analyse the way people normally speak because in those videos they tend to exaggerate the way they speak and they will only say on or two sentences. The reason of this lack of videos might be due to the isolation of these communities.
 
-As I encountered this problem, I decided to go out of the scope of Tiktok. YouTube seemed to be a great platform since there was more videos, especially interviews of people from Andean regions. These videos where mostly large videos of andean people being interview and from Cerro the Pasco. (describe the place and mention other languages that are spoken in that place. From those videos only the parts where they were speaking were crop and each audio file has the utterances of a single speaker. After I found the videos on Youtube, I downloaded, cropped, and convert them into wav files. As for the Tiktok videos (coastal dialect) it was not that difficult. Basically, my task was to download the videos and then convert them into wav audio files. That way they were ready for transcription.
+As I encountered this problem, I decided to go out of the scope of Tiktok. YouTube seemed to be a great platform since there was more videos, especially interviews of people from Andean regions. These videos where mostly large videos of Andean people being interview and from Cerro the Pasco. (describe the place and mention other languages that are spoken in that place. From those videos only the parts where they were speaking were crop and each audio file has the utterances of a single speaker. After I found the videos on YouTube, I downloaded, cropped, and convert them into WAV files. As for the Tiktok videos (coastal dialect) it was not that difficult. Basically, my task was to download the videos and then convert them into WAV audio files. That way they were ready for transcription.
+
+In total there are around 15 WAV files. There was 14 videos in the beginning, but one was added to match the amount of sentences per dialect.
 
 ### Transcription
 
-The second step of the corpus creation was to transform spoken data into text. So that it will be easier to capture different linguistic phenomena. So first I created a visual studio project to work on the transcription part and also repository in Github to save, keep track and organize my work. The transformer model I used is called Whisper. The annotated code is available in my repository. When transcribing the videos using the Whisper(cite), the coastal videos were almost perfectly transcribe. However, the transcriber could not identify the punctuation correctly and when a new sentences starts, it will sometimes start with capital letters but not always. Therefore, I had to correct the sentences boundaries manually. In contrast, the transformer model did not detect the words produced by speakers of Cerro de Pasco as good as it did for the coastal dialect. This might be due to the differences in pronunciation grammar and lexicon between them.
-
-Ther
+The second step of the corpus creation was to transform spoken data into machine-readable text files. So that it will be easier to capture different linguistic phenomena. So first I created a visual studio project to work on the transcription part and also repository in Github to save, keep track and organize my work. The transformer model I used is called Whisper. The annotated code is available in my repository. When transcribing the videos using the Whisper(cite), the coastal videos were almost perfectly transcribe. However, the model could not identify the punctuation and therefore the sentence boundary was not clear. When a new sentences started, it will sometimes the first letter would be capital letter, but not always. naturally, I had to correct the sentences boundaries manually. In contrast, the transformer model did not detect the words produced by speakers of Cerro de Pasco as good as it did for the coastal "limeño" dialect. This might be due to the differences in pronunciation grammar and lexicon between them and because the model has not been trained with this dialect. As a result of the transcrption process, I opteained a csv file that will then be used for the next part.
 
 ### Annotation
 
+A Corpus development has usually two major stages. The first one being data selection and processing. And that is what I have done until now (collection and transcription). The second stage is the annotation of this data. This stage is followed by the analysis if the data. For more details see Beck_et_al(2020). The type of annotation done in this Corpus is automatic annotation. Since it was sufficient to identify the word order, I didn't do any manual annotation.
+
+In the beginning, I started importing the necessary libraries @qi2020stanza , uuid, os and setting the path where the output files would be stored. This was followed by a function to map the transcribed document into the format that can be saved and another function to help me to map the token generated by the Stanza. As final step, a pipeline was initialized
+
 ```{r libraries}
-library(tidyverse)
+library(ggplot2)
 library(dplyr)
 ```
 
 ```{r datasets}
+
+# get dataframes of parsed sentences
+# documents contain sentences and sentences contain tokens
+# sentences$doc_id links with documents$id 
+# tokens$sentence_id links with sentences$id
 
 documents <- read.csv("../transcriber/output/parsed/documents.csv")
 sentences <- read.csv("../transcriber/output/parsed/sentences.csv")
@@ -97,8 +106,22 @@ tokens <- read.csv("../transcriber/output/parsed/tokens.csv")
 
 ```{r get word order function}
 
+# get word orders of each sentence
+# the function carries out the following steps to generate word order:
+# 1. iterate all given sentences
+# 2. iterate all verb tokens in each sentence
+# 3. get the 'nsubj' and 'obj' children from the dependency parsing result
+#    where 'head' column in tokens refer to its parent token index
+#    and 'deprel' refer to its relationship
+# 4. comparing the indices of nsubj(may not be present), obj and the verb
+
+
+# return a dataframe contains:
+# 1. word order in form of 'S', 'V', 'O' concatenated string
+# 2. the verb, the sentence and the document where the word order is presented
 get_sentences_word_order <- function(sentences_in) {
   
+  # initialize dataframe to store the result
   word_orders <- tibble(
     doc_id=character(),
     doc_title=character(),
@@ -111,30 +134,43 @@ get_sentences_word_order <- function(sentences_in) {
   
     for (i in 1:nrow(sentences_in)) {
       sentence <- sentences_in[i, ]
-      
+      # get document where the sentence is from
       document <- (documents %>% filter(id == sentence$doc_id))[1, ]
-    
+      
+      # filter tokens that belong to the sentence
       sentence_tokens <- tokens %>% filter(sentence_id == sentence$id)
     
+      # filter only verb tokens
       sentence_verb_tokens <- sentence_tokens %>% filter(upos == 'VERB')
       
+      # make sure there exist verbs in the sentence
+      # this step is necessary because 1:0 in R gives c(1, 0) which should be empty
       if (nrow(sentence_verb_tokens) > 0) {
+        
         for (i in 1:nrow(sentence_verb_tokens)) {
           
+          # get verb
           verb <- sentence_verb_tokens[i, ]
+          
+          # get nsubj children
           nsubj <- sentence_tokens %>% filter(head == verb$index & deprel == 'nsubj')
+          # get obj children
           obj <- sentence_tokens %>% filter(head == verb$index & deprel == 'obj')
           
+          # in case of no nsubj and one obj presents
+          # VO or OV
           if (nrow(nsubj) == 0 & nrow(obj) == 1) {
-            # VO or OV
             
-            # create named vector with s/v/o as names and their indices as value
+            # create named vector with S/V/O as names and their token indices as value
             word_order_pos <- c('v' = verb$index, 'o' = obj[1, ]$index)
+            
             # sort by indices then get names
             sorted_word_order <- names(sort(word_order_pos))
+            
             # concatenate
             word_order <- paste(sorted_word_order, collapse = '')
-    
+            
+            # store the result
             word_orders <- word_orders %>%  add_row(
               doc_id=document$id,
               doc_title=document$title,
@@ -145,12 +181,16 @@ get_sentences_word_order <- function(sentences_in) {
               word_order=word_order,
               dialect=document$dialect)
             
-          } else if (nrow(nsubj) == 1 & nrow(obj) == 1) {
-            # SVO
+          } 
+          else if (nrow(nsubj) == 1 & nrow(obj) == 1) 
+          {
+            # in case of one nsubj and one obj present
+            # all combination of 'S', 'V', 'O', e.g. SVO
             word_order_pos <- c('s' = nsubj[1, ]$index, 'v' = verb$index, 'o' = obj[1, ]$index)
+            
+            # the following steps are identical with the obj only case above
             sorted_word_order <- names(sort(word_order_pos))
             word_order <- paste(sorted_word_order, collapse = '')
-    
             word_orders <- word_orders %>%  add_row(
               doc_id=document$id,
               doc_title=document$title,
@@ -174,14 +214,29 @@ get_sentences_word_order <- function(sentences_in) {
 
 I found an abnormal osv in the bar plot. There was only one sentence from the andean dialect. I went to check that by searching the sentence ID and verb index and noticed that there were two sentences instead of one. The tokenizer could not detect the correct word order because of that. So I will separate the to sentences so that the tokenizer give me the correct data.
 
+```{r get affirmative sentence ids}
+# filter the sentence without '?' token
+affirmative_sentence_ids <- (tokens %>% group_by(sentence_id) %>% filter(!any(text == '?')) %>% summarise())$sentence_id
+```
+
 ```{r}
+# check if andean and costal have similar number of sentences
+print('Total sentence count in the two dialect categories')
 left_join(sentences, documents %>% rename(doc_id = id), by = "doc_id") %>%
+  group_by(dialect) %>% 
+  summarise(count = n())
+
+# # check if andean and costal have similar number of affirmative sentences 
+print('Affirmative sentence count in the two dialect categories')
+left_join(sentences, documents %>% rename(doc_id = id), by = "doc_id") %>%
+  filter(id %in% affirmative_sentence_ids) %>%
   group_by(dialect) %>% 
   summarise(count = n())
 
 ```
 
 ```{r word order for all sentences by dialect}
+# plot count of word orders in the two dialect groups as bar plot
 get_sentences_word_order(sentences) %>%
   group_by(dialect, word_order) %>%
   summarise(count = n()) %>%
@@ -192,7 +247,6 @@ get_sentences_word_order(sentences) %>%
 ```
 
 ```{r word order for affirmative sentences by dialect}
-affirmative_sentence_ids <- (tokens %>% group_by(sentence_id) %>% filter(!any(text == '?')) %>% summarise())$sentence_id
 affirmative_sentences <- sentences %>% filter(id %in% affirmative_sentence_ids)
 
 get_sentences_word_order(affirmative_sentences) %>%
