@@ -12,15 +12,21 @@ bibliography: bibliography_citedrive.bib
 
 ## I. Introduction
 
-Every language unique and serves as a window into the human cognition, culture, and society. A single language could contain features that other language may not. Yet, all languages serve the universal purpose of communication. The study of a language not only unravels the structure and patterns embedded within linguistic expressions but also sheds light on the diverse ways in which language is used and understood across different contexts and communities. Thus, if one wants to study a language, large data of the language is needed. 
+Every language is unique and serves as a window into the human cognition, culture, and society. A single language could contain features that other language may not. Yet, all languages serve the universal purpose of communication. The study of a language not only unravels the structure and patterns embedded within linguistic expressions but also sheds light on the diverse ways in which language is used and understood across different contexts and communities. Thus, if one wants to study a language, data of the language is needed.
 
 Spanish is a language spoken by millions all over the world. It exhibits considerable diversity across different regions, influenced by historical, social, geographical, and linguistic contact. Each Spanish-speaking country, and even within countries, regions, or communities, may have distinct linguistic features, known as dialects. The linguistic variation of these dialects manifests in differences in vocabulary, pronunciation, grammar, discourse patterns, etc. Among the Spanish-speaking countries, Peru stands out as a compelling case study for investigating linguistic diversity and variation. Situated in the heart of South America, Peru boasts a rich tapestry of cultural and linguistic heritage, shaped by indigenous languages, colonial history, and other sociopolitical factors. Within Peru itself, linguistic diversity is further amplified by the presence of multiple indigenous languages alongside Spanish, as well as regional variations in Spanish dialects. The Andean Spanish of Peru is a great example of linguistic diversity and how a language can be shaped when two to more languages interact. The Andean Spanish has been greatly influenced by the indigenous languages of the region not only phonologically speaking but also grammatically. It is known that this dialect makes use of OV structures more frequently than the coastal dialect, which is a typical feature of Quechua and Aymara languages that are spoken in this region[@Klee2011].
 
-In linguistics, the creation and analysis of corpora offer invaluable insights into the intricate nuances of language structure, variation, and usage. Therefore, I decided to create a corpus of the region of the coast and analyse the frequency of OV sentences from the coast and see to what extend the OV sentences typical of andean Spanish are present in the coastal peruvian Spanish. My idea in the beginning was to collect data from Tiktok from 3 different regions of Peru, namely, data from the coastal, andean and jungle dialect to then compare their different word order. Nonetheless, there was not enough videos available online for this kind of research. Then I found a large dataset online and decided to work with this data annotate it and analyse it. The main aim of this paper is to build a corpus using a dataset [@guevara-rukoz-etal-2020-crowdsourcing] containing only sentences in the Peruvian standard dialect of Spanish. This data has been taken from different audios. It has been transcribed and corrected. The sentences will be annotated so that it will be easier to investigate different linguistic phenomena. Nevertheless, we will focus on the word order of Spanish. In addition, this paper aims to investigate the frequency of OV sentences on our dataset.
+In linguistics, the creation and analysis of corpora offer invaluable insights into the intricate nuances of language structure, variation, and usage. Therefore, I decided to create a corpus containing utterances from the coastal region of Peru, to be more specific from Lima as well as sentences from Cerro de Pasco which is an Andean Spanish dialect. Additionally, I will analyse the word order of sentences from the coastal and Andean Spanish and see if Andean speakers tend to produce more OV construction compared to the Lima dialect speakers. My idea in the beginning was to collect data from from 3 different regions of Peru, namely, data from the coastal, Andean and jungle dialect to then compare their different word orders. Nonetheless, there was not enough videos available online for this kind of research, especially from the Andean and jungle region.Then, I decided to focus on only 2 dialects. The main aim of this paper is to build a corpus using the spoken data from videos available in the web.The sentences will be annotated so that it will be easier to investigate different word order in Spanish.
 
-### Research question
+### Research questions
 
-## II. Literature Review 
+-   RQ1. Do speakers of the andean dialect produce more OV compared to the coastal speakers?
+
+-   RQ2. What word order is more frequent in both dialects?
+
+We will focus on declarative sentences since some type of questions in Spanish change the order of its constituencies.
+
+## II. Literature Review
 
 The corpus approach has gain popularity in recent years as it is powerful methodology for analyzing different linguistic phenomena and linguistic variation. In this section, the importance of corpus-based studies to investigate linguistic phenomena will be highlighted, and a review of the literature on Peruvian Spanish word order will be provided as well.
 
@@ -34,7 +40,7 @@ Examples from @olarrea2012
 
 a\. (Él) compraba el periódico todos los días (SV0)
 
-(He) used-to-buy the newspaper every day 
+(He) used-to-buy the newspaper every day
 
 b\. (Él) compraba todos los días el periódico(SVO)
 
@@ -52,29 +58,34 @@ The newspaper is what (he) used-to-buy everyday
 
 g\. El periódico es lo que compraba todos los días (él) (OVS) (OV)
 
-h\. Compraba (él) el periódico todos los días ()
+h\. Compraba (él) el periódico todos los días (VSO)(VO)
 
-i\. Todos los dı´as compraba (él) el perio´dico.
+i\. Todos los días compraba (él) el periódico.
 
-According to @ocampo1995, In standard Spanish the object-verb word order is pragmatically marked, and it is used to indicate a contrary to expectation function, contrast, focal constituent and topic. This word order occurs no so frequent in non-contact Spanish such as "limeño" Spanish. Another study by @KleeandOcampo that investigated the pragmatic functions of OV and VO constructions in Calca Spanish discovered that the speakers make use of the object-verb word order to express repetition, summary, agreement and explanation in addition to the previously mentioned pragmatic functions.
+One crucial property of Spanish is that the ordering of elements in a sentence reveals a particular information structure which is unique to that utterance. We can say that focus marking affects the structure of sentences, which often results in the alteration of the canonical SVO order. According to @ocampo1995, In standard Spanish the object-verb word order is pragmatically marked, and it is used to indicate a contrary to expectation function, contrast, focal constituent and topic. This word order occurs no so frequent in non-contact Spanish such as "limeño" Spanish. Another study by @KleeandOcampo that investigated the pragmatic functions of OV and VO constructions in Calca Spanish discovered that the speakers make use of the object-verb word order to express repetition, summary, agreement and explanation in addition to the previously mentioned pragmatic functions.
 
 SVO is the canonical word order in Spanish. However When the subject is narrowly focused, it typically appears at the end of the sentence creating a VOS order. We can then say that focus marking affects the sentence structure, which often results in the alteration of the canonical SVO order(Domínguez2013)
 
-One crucial property of Spanish is that the ordering of elements in a sentence reveals a particular information structure which is unique to that utterance. We can say that focus marking affects the structure of sentences, which often results in the alteration of the canonical SVO order
-
-The F-marked subject (Marta) is the only element bearing main stress in sentence-final position in, a position that is unusual for subjects in languages with canonical SVO order (Zubizarreta. This example shows that there is a narrow link between where stress in assigned and where narrowly-focused elements can appear in a sentence in Spanish.
-
 ## III. Methodology
+
+### Data Collection
+
+One of the first steps of this corpus creation was to find videos. I wanted to collect spoken naturalistic data from tiktok videos. It seemed to be an easy task. Just find any random videos and download them base on their regional accent. In fact, I spend quite long time trying to find these videos. Though, this was not the case of coastal Spanish videos. I found videos of people recommending restaurants, clothes, makeup and even activities that one can do during your free time. The hard part, however, was to find videos from andean and jungle people speaking Spanish. When searching for videos of recommendations of places in their regions, of restaurants or activities, only people speaking a coastal dialect appeared. I also found videos of these speakers explaining the way they speak. This was the case of both dialects. This, in my opinion, is not natural discourse and cannot be used to analyse the way people normally speak because in those videos they tend to exaggerate the way they speak and they will only say on or two sentences. The reason of this lack of videos might be due to the isolation of these communities.
+
+As I encountered this problem, I decided to go out of the scope of Tiktok. YouTube seemed to be a great platform since there was more videos, especially interviews of people from Andean regions. These videos where mostly large videos of andean people being interview and from Cerro the Pasco. (describe the place and mention other languages that are spoken in that place. From those videos only the parts where they were speaking were crop and each audio file has the utterances of a single speaker. After I found the videos on Youtube, I downloaded, cropped, and convert them into wav files. As for the Tiktok videos (coastal dialect) it was not that difficult. Basically, my task was to download the videos and then convert them into wav audio files. That way they were ready for transcription.
+
+### Transcription
+
+The second step of the corpus creation was to transform spoken data into text. So that it will be easier to capture different linguistic phenomena. So first I created a visual studio project to work on the transcription part and also repository in Github to save, keep track and organize my work. The transformer model I used is called Whisper. The annotated code is available in my repository. When transcribing the videos using the Whisper(cite), the coastal videos were almost perfectly transcribe. However, the transcriber could not identify the punctuation correctly and when a new sentences starts, it will sometimes start with capital letters but not always. Therefore, I had to correct the sentences boundaries manually. In contrast, the transformer model did not detect the words produced by speakers of Cerro de Pasco as good as it did for the coastal dialect. This might be due to the differences in pronunciation grammar and lexicon between them.
+
+Ther
+
+### Annotation
 
 ```{r libraries}
 library(tidyverse)
 library(dplyr)
 ```
-
-Questions: 
-How to know the word order of the sentences from dependancy tree?
-
-
 
 ```{r datasets}
 
@@ -109,17 +120,35 @@ get_sentences_word_order <- function(sentences_in) {
       
       if (nrow(sentence_verb_tokens) > 0) {
         for (i in 1:nrow(sentence_verb_tokens)) {
+          
           verb <- sentence_verb_tokens[i, ]
           nsubj <- sentence_tokens %>% filter(head == verb$index & deprel == 'nsubj')
           obj <- sentence_tokens %>% filter(head == verb$index & deprel == 'obj')
-    
-          if (nrow(nsubj) == 1 & nrow(obj) == 1) {
-    
-          # create named vector with s/v/o as names and their indices as value
-            word_order_pos <- c('s' = nsubj[1, ]$index, 'v' = verb$index, 'o' = obj[1, ]$index)
-          # sort by indices then get names
+          
+          if (nrow(nsubj) == 0 & nrow(obj) == 1) {
+            # VO or OV
+            
+            # create named vector with s/v/o as names and their indices as value
+            word_order_pos <- c('v' = verb$index, 'o' = obj[1, ]$index)
+            # sort by indices then get names
             sorted_word_order <- names(sort(word_order_pos))
-          # concatenate
+            # concatenate
+            word_order <- paste(sorted_word_order, collapse = '')
+    
+            word_orders <- word_orders %>%  add_row(
+              doc_id=document$id,
+              doc_title=document$title,
+              sentence_id=sentence$id,
+              sentence_index=as.character(sentence$index),
+              verb_id=verb$id,
+              verb_index=verb$index,
+              word_order=word_order,
+              dialect=document$dialect)
+            
+          } else if (nrow(nsubj) == 1 & nrow(obj) == 1) {
+            # SVO
+            word_order_pos <- c('s' = nsubj[1, ]$index, 'v' = verb$index, 'o' = obj[1, ]$index)
+            sorted_word_order <- names(sort(word_order_pos))
             word_order <- paste(sorted_word_order, collapse = '')
     
             word_orders <- word_orders %>%  add_row(
@@ -142,6 +171,9 @@ get_sentences_word_order <- function(sentences_in) {
 ```
 
 ## IV. Data analysis
+
+I found an abnormal osv in the bar plot. There was only one sentence from the andean dialect. I went to check that by searching the sentence ID and verb index and noticed that there were two sentences instead of one. The tokenizer could not detect the correct word order because of that. So I will separate the to sentences so that the tokenizer give me the correct data.
+
 ```{r}
 left_join(sentences, documents %>% rename(doc_id = id), by = "doc_id") %>%
   group_by(dialect) %>% 
