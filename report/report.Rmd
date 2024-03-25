@@ -16,11 +16,13 @@ Every language is unique and serves as a window into the human cognition, cultur
 
 Spanish is a language spoken by millions all over the world. It exhibits considerable diversity across different regions, influenced by historical, social, geographical, and linguistic contact. Each Spanish-speaking country, and even within countries, regions, or communities, may have distinct linguistic features, known as dialects. The linguistic variation of these dialects manifests in differences in vocabulary, pronunciation, grammar, discourse patterns, etc. Among the Spanish-speaking countries, Peru stands out as a compelling case study for investigating linguistic diversity and variation. Situated in the heart of South America, Peru boasts a rich tapestry of cultural and linguistic heritage, shaped by indigenous languages, colonial history, and other sociopolitical factors. Within Peru itself, linguistic diversity is further amplified by the presence of multiple indigenous languages alongside Spanish, as well as regional variations in Spanish dialects. The Andean Spanish of Peru is a great example of linguistic diversity and how a language can be shaped when two to more languages interact. The Andean Spanish has been greatly influenced by the indigenous languages of the region not only phonologically speaking but also grammatically. It is known that this dialect makes use of OV structures more frequently than the coastal dialect, which is a typical feature of Quechua and Aymara languages that are spoken in this region[@Klee2011].
 
-In linguistics, the creation and analysis of corpora offer invaluable insights into the intricate nuances of language structure, variation, and usage. Therefore, I decided to create a corpus containing utterances from the coastal region of Peru, to be more specific from Lima as well as sentences from Cerro de Pasco which is an Andean Spanish dialect. Additionally, I will analyse the word order of sentences from the coastal and Andean Spanish and see if Andean speakers tend to produce more OV construction compared to the Lima dialect speakers. My idea in the beginning was to collect data from from 3 different regions of Peru, namely, data from the coastal, Andean and jungle dialect to then compare their different word orders. Nonetheless, there was not enough videos available online for this kind of research, especially from the Andean and jungle region.Then, I decided to focus on only 2 dialects. The main aim of this paper is to build a corpus using the spoken data from videos available in the web.The sentences will be annotated so that it will be easier to investigate different word order in Spanish.
+In linguistics, the creation and analysis of corpora offer invaluable insights into the intricate nuances of language structure, variation, and usage. Therefore, I decided to create a corpus containing utterances from the coastal region of Peru, to be more specific from Lima as well as sentences from Cerro de Pasco which is an Andean Spanish dialect. Additionally, I will analyse the word order of sentences from the coastal and Andean Spanish and see if Andean speakers tend to produce more OV construction compared to the Lima dialect speakers. My idea in the beginning was to collect data from 3 different regions of Peru, namely, data from the coastal, Andean and jungle dialect to then compare their different word orders. Nonetheless, there was not enough videos available online for this kind of research, especially from the Andean and jungle region. Then, I decided to focus on only 2 dialects.
+
+The main aim of this paper is to build a corpus using the spoken data from videos available in the web. The sentences will be annotated so that it will be easier to investigate different word order in Spanish.
 
 ### Research questions
 
--   RQ1. Do speakers of the andean dialect produce more OV compared to the coastal speakers?
+-   RQ1. Do speakers of the Andean dialect produce more OV compared to the coastal speakers?
 
 -   RQ2. What word order is more frequent in both dialects?
 
@@ -62,35 +64,37 @@ h\. Compraba (él) el periódico todos los días (VSO)(VO)
 
 i\. Todos los días compraba (él) el periódico.
 
-One crucial property of Spanish is that the ordering of elements in a sentence reveals a particular information structure which is unique to that utterance. We can say that focus marking affects the structure of sentences, which often results in the alteration of the canonical SVO order. According to @ocampo1995, In standard Spanish the object-verb word order is pragmatically marked, and it is used to indicate a contrary to expectation function, contrast, focal constituent and topic. This word order occurs no so frequent in non-contact Spanish such as "limeño" Spanish. Another study by @KleeandOcampo that investigated the pragmatic functions of OV and VO constructions in Calca Spanish discovered that the speakers make use of the object-verb word order to express repetition, summary, agreement and explanation in addition to the previously mentioned pragmatic functions.
+One crucial property of Spanish is that the ordering of elements in a sentence reveals a particular information structure which is unique to that utterance. We can say that focus marking affects the structure of sentences, which often results in the alteration of the canonical SVO order. When the subject is narrowly focused, it typically appears at the end of the sentence creating a VOS order which end up changing the SVO order. According to @ocampo1995, In standard Spanish the object-verb word order is pragmatically marked, and it is used to indicate a contrary to expectation function, contrast, focal constituent and topic. This word order, however, occurs no so frequent in Standard and non-contact Spanish such as 'limeño' Spanish. Another study by @KleeandOcampo that investigated the pragmatic functions of OV and VO constructions in Calca Spanish discovered that the speakers make use of the object-verb word order to express repetition, summary, agreement and explanation in addition to the previously mentioned pragmatic functions.
 
-SVO is the canonical word order in Spanish. However When the subject is narrowly focused, it typically appears at the end of the sentence creating a VOS order. We can then say that focus marking affects the sentence structure, which often results in the alteration of the canonical SVO order(Domínguez2013)
+Among the most remarkable features of Andean Spanish, is the use of OV constructions which it has been proved to occur more frequently in these communities than other non-contact dialects of Spanish [@Klee2011]. This is definitely a feature taken from Quechua and Aymara, which are the indigenous languages spoken in that region.
+
+Although investigating the pragmatic functions and prosodic properties of the different word orders in Spanish sound a very interesting and promising idea, this paper will just observe and describe the distribution the word orders produced by both dialects, coastal and Andean. And see if Andean speakers produces more OV than the coastal speakers and what type of word order occurs more from our data.
 
 ## III. Methodology
-### Transcription
-
-The second step of this corpus creation was to find a way to transform the spoken data into text. So, for the transcription, I used a transformer model called Whisper.  I created a repository in github to record and organize my work. The annotated code  is in a script called transcriber. 
-
-When I first started using the base model. the result of the transcription was not that accurate because I was using the base model. The medium model, in contrast, was and although it has some mistakes, it did a grant job. Another thing to mention is that when I try to use the large one, my computer could not handle. 
-
 
 ### Data Collection
 
-One of the first steps of this corpus creation was to find videos. I wanted to collect spoken naturalistic data from tiktok videos. It seemed to be an easy task. Just find any random videos and download them base on their regional accent. In fact, I spend quite long time trying to find these videos. Though, this was not the case of coastal Spanish videos. I found videos of people recommending restaurants, clothes, makeup and even activities that one can do during your free time. The hard part, however, was to find videos from andean and jungle people speaking Spanish. When searching for videos of recommendations of places in their regions, of restaurants or activities, only people speaking a coastal dialect appeared. I also found videos of these speakers explaining the way they speak. This was the case of both dialects. This, in my opinion, is not natural discourse and cannot be used to analyse the way people normally speak because in those videos they tend to exaggerate the way they speak and they will only say on or two sentences. The reason of this lack of videos might be due to the isolation of these communities.
+One of the first steps of this corpus creation was to find videos. I wanted to collect spoken naturalistic data from TikTok videos. It seemed to be an easy task. Just find any random videos and download them base on their regional accent. In fact, I spend quite long time trying to find these videos. Though, this was not the case of coastal Spanish videos. I found videos of people recommending restaurants, clothes, makeup and even activities that one can do during your free time. The hard part, however, was to find videos from Andean and jungle people speaking Spanish. When searching for videos of recommendations of places in their regions, of restaurants or activities, only people speaking a coastal dialect appeared. I also found videos of these speakers explaining the way they speak. This was the case of both dialects. This, in my opinion, is not natural discourse and cannot be used to analyse the way people normally speak because in those videos they tend to exaggerate the way they speak and they will only say on or two sentences. The reason of this lack of videos might be due to the isolation of these communities.
 
-As I encountered this problem, I decided to go out of the scope of Tiktok. YouTube seemed to be a great platform since there was more videos, especially interviews of people from Andean regions. These videos where mostly large videos of Andean people being interview and from Cerro the Pasco. (describe the place and mention other languages that are spoken in that place. From those videos only the parts where they were speaking were crop and each audio file has the utterances of a single speaker. After I found the videos on YouTube, I downloaded, cropped, and convert them into WAV files. As for the Tiktok videos (coastal dialect) it was not that difficult. Basically, my task was to download the videos and then convert them into WAV audio files. That way they were ready for transcription.
+As I encountered this problem, I decided to go out of the scope of TikTok. YouTube seemed to be a great platform since there was more videos, especially interviews of people from Andean regions. These videos where mostly large videos of Andean people being interview and from Cerro the Pasco. (Describe the place and mention other languages that are spoken in that place. From those videos only the parts where they were speaking were crop and each audio file has the utterances of a single speaker. After I found the videos on YouTube, I downloaded, cropped, and convert them into WAV files. As for the TikTok videos (coastal dialect) it was not that difficult. Basically, my task was to download the videos and then convert them into WAV audio files. That way they were ready for transcription.
 
-In total there are around 15 WAV files. There was 14 videos in the beginning, but one was added to match the amount of sentences per dialect.
+In total there are around 15 WAV files. There was 14 videos in the beginning, but one was added to match the number of sentences per dialect.
 
 ### Transcription
 
-The second step of the corpus creation was to transform spoken data into machine-readable text files. So that it will be easier to capture different linguistic phenomena. So first I created a visual studio project to work on the transcription part and also repository in Github to save, keep track and organize my work. The transformer model I used is called Whisper. The annotated code is available in my repository. When transcribing the videos using the Whisper(cite), the coastal videos were almost perfectly transcribe. However, the model could not identify the punctuation and therefore the sentence boundary was not clear. When a new sentences started, it will sometimes the first letter would be capital letter, but not always. naturally, I had to correct the sentences boundaries manually. In contrast, the transformer model did not detect the words produced by speakers of Cerro de Pasco as good as it did for the coastal "limeño" dialect. This might be due to the differences in pronunciation grammar and lexicon between them and because the model has not been trained with this dialect. As a result of the transcrption process, I opteained a csv file that will then be used for the next part.
+The second step of the corpus creation was to transform spoken data into machine-readable text files. So that it will be easier to capture different linguistic phenomena. So first I created a visual studio project to work on the transcription part and also repository in Github to save, keep track and organize my work. The transformer model I used is called Whisper. The annotated code is available in my repository. I first started using the base model. The result of the transcription was not that accurate. The medium model, in contrast, was more precise, and although it has some mistakes, it did a grant job When transcribing the videos, especially for the coastal videos as they were almost perfectly transcribed. However, the model could not identify the punctuation and therefore the sentence boundary was not clear. When new sentences started, it will sometimes the first letter would be capital letter, but not always. And this can represent a problem in the annotation and analysis part. Naturally, I had to correct the sentences boundaries manually. In contrast, the transformer model did not detect the words produced by speakers of Cerro de Pasco as good as it did for the coastal "limeño" dialect. This might be due to the differences in pronunciation grammar and lexicon between them and because the model has not been trained with this dialect. As a result of the transcription process, I optioned a csv file that was then be used for the next part.
 
 ### Annotation
 
-A Corpus development has usually two major stages. The first one being data selection and processing. And that is what I have done until now (collection and transcription). The second stage is the annotation of this data. This stage is followed by the analysis if the data. For more details see Beck_et_al(2020). The type of annotation done in this Corpus is automatic annotation. Since it was sufficient to identify the word order, I didn't do any manual annotation.
+A Corpus development has usually two major stages. The first one being data selection and processing. And that is what I have done until now (collection and transcription). The second stage is the annotation of this data. This stage is followed by the analysis if the data. For more details see @beck-etal-2020-representation . The type of annotation done on this Corpus is automatic annotation. Since it was sufficient to identify the word order, I did not do any manual annotation.
 
-In the beginning, I started importing the necessary libraries @qi2020stanza , uuid, os and setting the path where the output files would be stored. This was followed by a function to map the transcribed document into the format that can be saved and another function to help me to map the token generated by the Stanza. As final step, a pipeline was initialized
+In the beginning, I started the script by importing the necessary libraries such as @qi2020stanza by setting the path where the output files would be stored. This was followed by a function to map the transcribed document into the format that can be saved and another function to help me to map the token generated by the Stanza. Next, the annotation process initialized by using Stanza package. It broke down the text into sentences and into tokens. These tokens were automatically annotated containing information on their part of speech tags, id, index, lemma, dependency relation, etc.
+
+As a result of this process, I obtained three documents the first one called documents, the second sentences and the last one tokens which I imported to R.
+
+### Word Order Function
+
+In this part, we want to get the different word order from the coastal Spanish as well as from the andean Spanish. To accomplish this, I plot a function that will help us to get the word order of each sentence. The annotated code can be observed bellow.
 
 ```{r libraries}
 library(ggplot2)
@@ -218,11 +222,11 @@ get_sentences_word_order <- function(sentences_in) {
 
 ## IV. Data analysis
 
-I found an abnormal osv in the bar plot. There was only one sentence from the andean dialect. I went to check that by searching the sentence ID and verb index and noticed that there were two sentences instead of one. The tokenizer could not detect the correct word order because of that. So I will separate the to sentences so that the tokenizer give me the correct data.
+Here, we have removed all the questions from our data to just focus on declarative sentences. Then I had to check the number of sentences per dialect. The Andean dialect has 100 sentences in total while the coastal has 91 sentences. I then check the amount of sentences that were not questions. The Andean and the coastal dialect have 85 sentences each. Before it was not equal. In fact, the Andean dialect (74) had less sentences than the coastal one (80). So, I deleted a couple of sentences to make them equal.
 
-```{r get affirmative sentence ids}
+```{r get declarative sentence ids}
 # filter the sentence without '?' token
-affirmative_sentence_ids <- (tokens %>% group_by(sentence_id) %>% filter(!any(text == '?')) %>% summarise())$sentence_id
+declarative_sentence_ids <- (tokens %>% group_by(sentence_id) %>% filter(!any(text == '?')) %>% summarise())$sentence_id
 ```
 
 ```{r}
@@ -232,14 +236,16 @@ left_join(sentences, documents %>% rename(doc_id = id), by = "doc_id") %>%
   group_by(dialect) %>% 
   summarise(count = n())
 
-# # check if andean and costal have similar number of affirmative sentences 
-print('Affirmative sentence count in the two dialect categories')
+# # check if andean and costal have similar number of declarative sentences 
+print('declarative sentence count in the two dialect categories')
 left_join(sentences, documents %>% rename(doc_id = id), by = "doc_id") %>%
-  filter(id %in% affirmative_sentence_ids) %>%
+  filter(id %in% declarative_sentence_ids) %>%
   group_by(dialect) %>% 
   summarise(count = n())
 
 ```
+
+Two bar plots can be observed bellow. The first one is showing the distribution of all the sentences word order according to the dialect while the second plot is showing the distribution of only the declarative sentences. In both plots we can see that the Andean group have slightly produced more OV sentences, around 14 sentences, compared to the other group which has produced around 12 OV sentences. On the other hand, both groups produces more VO sentences, but we can also see that the coastal speakers have produced more VO word orders.
 
 ```{r word order for all sentences by dialect}
 # plot count of word orders in the two dialect groups as bar plot
@@ -250,23 +256,32 @@ get_sentences_word_order(sentences) %>%
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
   labs(x = "Word Order", y = "Count",
        title = "Word Orders for All Sentences by Dialects")
+
 ```
 
-```{r word order for affirmative sentences by dialect}
-affirmative_sentences <- sentences %>% filter(id %in% affirmative_sentence_ids)
-
-get_sentences_word_order(affirmative_sentences) %>%
+```{r word order for declarative sentences by dialect}
+declarative_sentences <- sentences %>% filter(id %in% declarative_sentence_ids)
+get_sentences_word_order(sentences) %>%
   group_by(dialect, word_order) %>%
   summarise(count = n()) %>%
   ggplot(aes(x = word_order, y = count, fill = dialect)) + 
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
   labs(x = "Word Order", y = "Count",
-       title = "Word Orders for Affirmative Sentences by Dialects")
+       title = "Word Orders for Declarative Sentences by Dialects")
 
+View(get_sentences_word_order(sentences))
 ```
+
+In the plots, I have found an abnormal OSV in the bar plot. It only one sentence from the Andean dialect. I went to check that by searching the sentence ID and verb index and noticed that there were two sentences instead of one. The tokenizer could not detect the correct word order because of that. So do not consider that word order.
 
 ## V. Discussion
 
+Although the results of this small corpus-based study shows that, indeed, Andean speakers produces a more OV sentences than Lima people, we cannot simply claim that our data confirm that claim because our dataset is too small. Of course, It has been demonstrated that Andean communities tend to use this particular word order more frequently. This is because Spanish in that region has been in contact with other languages [@Klee2011]. SVO is the canonical word order of Spanish. Nevertheless, around 70 % of the time the subject is omitted in normal speech [@thecamb2018]. This is something that we could say is somehow confirm in our corpus. Most of the sentences of both dialects were VO. As I said the data is too small. For this reason, I plan to extend this small research by adding more data and examining the pragmatic and prosodic functions of the different word order in different dialects of Spanish.
+
+The main goal of this paper was to build a corpus focusing on word order, but it could serve other purposes. For example, using dependency parsing, you can identify the semantic roles of words within sentences, such as agent, patient, theme, etc. This is crucial for understanding the meaning conveyed by sentences beyond just their syntactic structure. Frequency Analysis is something that can be investigated as well. With POS tagging and lemmatization, you can analyze the frequency of different word forms and grammatical categories within the corpus. This helps in identifying common patterns of language use.
+
 ## VI. Conclusion
+
+In conclusion, our small-scale study indicates a tendency of Andean speakers produce OV sentence structures over their Lima counterparts, although the limited dataset prevents us from drawing conclusions. Despite Spanish's standard SVO order, the frequent omission of subjects in everyday speech, as evidenced in our corpus and supported by existing research, is confirmed by our findings. To address the limitations of our study, future research will expand the dataset and explore the pragmatic and prosodic dimensions of word order variations across Spanish dialects. While our primary aim was corpus construction for word order analysis, the versatility of this resource offers potential for further exploration into diverse linguistic phenomena within the Spanish language.
 
 ## References
