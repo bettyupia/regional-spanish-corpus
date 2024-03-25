@@ -1,1 +1,15 @@
-﻿VideoID,Dialect,Duration,Source,Speakerid,Speaker's gender
+﻿VideoID,Dialect,Source,Speaker's gender
+barras.wav,coastal,TikTok,female
+child.wav,andean,TikTok,female
+patinaje.wav,coastal,TikTok,female
+restaurantes2.wav,coastal,TikTok,female
+ropa.wav,coastal,TikTok,female
+speaker1.wav,andean,YouTube,female
+speaker2.wav,andean,YouTube,male
+speaker3.wav,andean,YouTube,male
+speaker4.wav,andean,YouTube,female
+speaker6.wav,andean,YouTube,male
+speaker7.wav,andean,YouTube,female
+speaker8.wav,andean,YouTube,female
+speaker9.wav,andean,YouTube,male
+tienda-de-ropa.wav,coastal,TikTok,female
